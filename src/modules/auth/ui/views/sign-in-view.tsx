@@ -43,8 +43,8 @@ export const SignInView = () => {
       await authClient.signIn.email({
         email: data.email,
         password: data.password,
+        callbackURL:"/",
       });
-      router.push("/");
     } catch (err: any) {
       if (err.code === "invalid_email") {
         setError("Invalid email address. Please check and try again.");
@@ -57,32 +57,25 @@ export const SignInView = () => {
       setIsLoading(false);
     }
   };
-
-  const handleGoogleLogin = async () => {
+  const onSocial = async (provider:"github"|"google") => {
     setIsLoading(true);
     setError(null);
-    try {
-      await authClient.signIn.social({
-        provider: "google",
-      });
-      router.push("/");
-    } catch (err: any) {
-      setError(err.message || "Failed to sign in with Google. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  const handleGithubLogin = async () => {
-    setIsLoading(true);
-    setError(null);
     try {
       await authClient.signIn.social({
-        provider: "github",
+        provider: provider,
+        callbackURL:"/",
       });
-      router.push("/");
     } catch (err: any) {
-      setError(err.message || "Failed to sign in with GitHub. Please try again.");
+      if (err.code === "invalid_email") {
+        setError("Invalid email address. Please check and try again.");
+      } else if (err.code === "invalid_password") {
+        setError("Invalid password. Please ensure it meets the requirements.");
+      } else if (err.code === "email_already_exists") {
+        setError("This email is already registered. Please use a different email.");
+      } else {
+        setError(err.message || "Failed to sign up. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -203,9 +196,10 @@ export const SignInView = () => {
                       type="button"
                       variant="outline"
                       disabled={isLoading}
-                      onClick={handleGoogleLogin}
+                      onClick={() => onSocial("google")}
                       className="w-full"
                     >
+                    
                       <FcGoogle className="mr-2 h-4 w-4" />
                       Google
                     </Button>
@@ -213,10 +207,10 @@ export const SignInView = () => {
                       type="button"
                       variant="outline"
                       disabled={isLoading}
-                      onClick={handleGithubLogin}
+                      onClick={() => onSocial("github")}
                       className="w-full"
                     >
-                      <FaGithub className="mr-2 h-4 w-4" />
+                        <FaGithub className="mr-2 h-4 w-4" />
                       GitHub
                     </Button>
                   </div>
