@@ -83,12 +83,12 @@ export const SignInView = () => {
 
   return (
     <div className="max-w-2xl mx-auto my-4 p-4">
-      <div className="flex rounded-2xl shadow-2xl overflow-hidden bg-white">
+      <div className="flex flex-col lg:flex-row rounded-2xl shadow-2xl overflow-hidden bg-white">
         {/* Left Side - Login Form */}
-        <div className="flex-1 p-6 bg-background">
+        <div className="flex-1 p-4 lg:p-6 bg-background order-2 lg:order-1">
           <Card className="border-0 shadow-none">
             <CardHeader className="space-y-1 px-0">
-              <CardTitle className="text-2xl font-bold">
+              <CardTitle className="text-xl lg:text-2xl font-bold">
                 Sign in to your account
               </CardTitle>
             </CardHeader>
@@ -163,7 +163,7 @@ export const SignInView = () => {
                     <Button
                       type="button"
                       variant="link"
-                      className="px-0 font-normal"
+                      className="px-0 font-normal text-sm"
                       onClick={() => {
                         console.log("Forgot password clicked");
                       }}
@@ -191,7 +191,7 @@ export const SignInView = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Button
                       type="button"
                       variant="outline"
@@ -236,24 +236,24 @@ export const SignInView = () => {
         </div>
 
         {/* Right Side - Meet.AI Branding */}
-        <div className="flex-1 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 flex items-center justify-center p-6">
+        <div className="flex-1 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 flex items-center justify-center p-4 lg:p-6 order-1 lg:order-2">
           <div className="text-center text-white space-y-4">
-            <div className="flex justify-center mt-6">
-              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-transparent flex items-center justify-center shadow-2xl scale-150">
+            <div className="flex justify-center mt-2 lg:mt-6">
+              <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl overflow-hidden bg-transparent flex items-center justify-center shadow-2xl scale-125 lg:scale-150">
                 <Image src="/logo.svg" alt="Meet.AI" width={64} height={64} />
               </div>
             </div>
-            <div className="space-y-4">
-              <h1 className="text-3xl font-bold">
+            <div className="space-y-2 lg:space-y-4">
+              <h1 className="text-2xl lg:text-3xl font-bold">
                 Meet.AI
               </h1>
             </div>
 
-            <div className="space-y-4 max-w-sm mx-auto">
-              <p className="text-lg font-medium opacity-90">
+            <div className="space-y-3 lg:space-y-4 max-w-sm mx-auto">
+              <p className="text-base lg:text-lg font-medium opacity-90">
                 Where Intelligence Meets Innovation
               </p>
-              <p className="text-sm opacity-75 leading-relaxed">
+              <p className="text-xs lg:text-sm opacity-75 leading-relaxed">
                 Connect with the future of artificial intelligence. 
                 Streamline your workflow and unlock new possibilities.
               </p>
@@ -263,7 +263,7 @@ export const SignInView = () => {
       </div>
 
       {/* Terms and Conditions Section */}
-      <div className="mt-6 text-center px-4">
+      <div className="mt-4 lg:mt-6 text-center px-2 lg:px-4">
         <p className="text-xs text-muted-foreground leading-relaxed">
           By signing in, you agree to our{" "}
           <Button
