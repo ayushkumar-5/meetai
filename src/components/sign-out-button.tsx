@@ -21,11 +21,11 @@ export const SignOutButton = () => {
   };
 
   return (
-    <Button 
-      onClick={handleSignOut}
-      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-fit"
-    >
-      Sign out
-    </Button>
+    <Button
+  onClick={handleSignOut}
+  className="bg-[var(--primary)] text-[var(--primary-foreground)] px-4 py-2 rounded w-fit"
+>
+  Sign out
+</Button>
   );
 }; 
