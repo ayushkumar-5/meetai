@@ -1,9 +1,13 @@
-import {auth} from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import {redirect} from "next/navigation";
-import { SignOutButton } from "@/components/sign-out-button";
+import { redirect } from "next/navigation";
+import { HomeView } from "@/modules/home/ui/views/home-view";
+
+import { caller } from "@/trpc/server";
 
 const Page = async () => {
+  const data = await caller.hello({ text: "Ayushh Server" });
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -12,13 +16,9 @@ const Page = async () => {
     redirect("/sign-in");
   }
 
-  return (
-    <div className="flex flex-col p-4 gap-y-4">
-      <h1>Welcome, {session.user.name}!</h1>
-      <p>You are successfully logged in.</p>
-      <SignOutButton />
-    </div>
-  );
+  return <p>{data.greeting}</p>;
+  // Uncommitted changes
+  return <HomeView />;
 };
 
 export default Page;
