@@ -7,7 +7,7 @@ const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
 });
-
+import { Toaster } from "@/components/ui/sonner";
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -31,6 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <Toaster/>
         {children}
       </body>
     </html>
