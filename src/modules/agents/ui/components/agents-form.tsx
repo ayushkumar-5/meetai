@@ -76,6 +76,7 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: AgentFormProps
       <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex items-center gap-4">
           <GeneratedAvatar
+            variant="bottts"
             seed={form.watch("name")}
             size={48}
             className="border rounded-full"

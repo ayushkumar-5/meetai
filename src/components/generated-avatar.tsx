@@ -1,31 +1,43 @@
-
 import React from "react";
 import { createAvatar } from "@dicebear/core";
-import { identicon } from "@dicebear/collection"; // Replace with a collection of your choice
-// You can import 'avataaars', 'bottts', 'micah', etc. from @dicebear/collection
+import {
+  identicon,
+  bottts,
+  micah,
+  avataaars,
+} from "@dicebear/collection"; // Updated: using 'bottts'
 
 interface GeneratedAvatarProps {
-  seed: string; // Unique identifier for the avatar (username, email, etc)
-  size?: number; // Size in px
+  seed: string;
+  size?: number;
   className?: string;
+  variant?: "identicon" | "bottts" | "micah" | "avataaars"; // Updated variant type
 }
 
 const GeneratedAvatar: React.FC<GeneratedAvatarProps> = ({
   seed,
   size = 64,
   className = "",
+  variant = "identicon",
 }) => {
-  // Generate SVG string based on the seed
+  // Select the correct style based on variant
+  const style = {
+    identicon,
+    bottts,
+    micah,
+    avataaars,
+  }[variant];
+
+  // Generate SVG string
   const avatar = React.useMemo(
-    () => createAvatar(identicon, { seed, size }).toString(),
-    [seed, size]
+    () => createAvatar(style, { seed, size }).toString(),
+    [seed, size, style]
   );
 
   return (
     <span
       className={className}
       style={{ display: "inline-block", width: size, height: size }}
-      // Render the SVG as inner HTML
       dangerouslySetInnerHTML={{ __html: avatar }}
     />
   );
