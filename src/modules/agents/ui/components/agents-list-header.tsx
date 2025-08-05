@@ -3,7 +3,7 @@ import { PlusIcon, XCircleIcon } from "lucide-react";
 import { useState } from "react";
 import { DEFAULT_PAGE } from "@/constants";
 import { Button } from "@/components/ui/button";
-import { NewAgentDialog } from "./new-agents-dialog";
+import { NewAgentDialog } from "./new-agent-dialog";
 import { AgentsSearchFilter } from "./agents-search-filter";
 import { useAgentsFilters } from "../../hooks/use-agents-filters";
 
