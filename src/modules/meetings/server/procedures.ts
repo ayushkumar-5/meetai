@@ -9,6 +9,26 @@ import { meetingsInsertSchema, meetingsUpdateSchema } from "../schemas";
 import { MeetingStatus } from "../types";
 
 export const meetingsRouter = createTRPCRouter({
+    remove: protectedProcedure
+    .input(z.object({id:z.string()}))
+    .mutation(async ({ ctx, input }) => {
+      const [removedMeeting] = await db
+        .delete(meetings)
+        .where(
+          and(
+            eq(meetings.id, input.id),
+            eq(meetings.userId, ctx.auth!.user.id)
+          )
+        )
+        .returning();
+      if (!removedMeeting) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Meeting not found",
+        });
+      }
+      return removedMeeting;
+    }),
     update: protectedProcedure
     .input(meetingsUpdateSchema)
     .mutation(async ({ ctx, input }) => {
@@ -18,7 +38,7 @@ export const meetingsRouter = createTRPCRouter({
         .where(
           and(
             eq(meetings.id, input.id),
-            eq(meetings.userId, ctx.auth.user.id)
+            eq(meetings.userId, ctx.auth!.user.id)
           )
         )
         .returning();
@@ -34,10 +54,11 @@ export const meetingsRouter = createTRPCRouter({
         const [agent] = await db
           .select({ instructions: agents.instructions })
           .from(agents)
+          // .innerJoin(agents, eq(meetings agentId, agents.id)
           .where(
             and(
               eq(agents.id, input.agentId),
-              eq(agents.userId, ctx.auth.user.id)
+              eq(agents.userId, ctx.auth!.user.id)
             )
           );
 
@@ -49,7 +70,7 @@ export const meetingsRouter = createTRPCRouter({
           .insert(meetings)
           .values({
             ...input,
-            userId: ctx.auth.user.id,
+            userId: ctx.auth!.user.id,
             instructions: agent.instructions,
           })
           .returning();
@@ -64,7 +85,7 @@ export const meetingsRouter = createTRPCRouter({
       })
       .from(meetings)
       .innerJoin(agents, eq(meetings.agentId, agents.id))
-      .where(and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id)));
+      .where(and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth!.user.id)));
 
     if (!existingMeeting) {
       throw new TRPCError({ code: "NOT_FOUND", message: "Meeting not found" });
@@ -103,7 +124,7 @@ export const meetingsRouter = createTRPCRouter({
         agentId
       } = input || {};
 
-      const whereConditionsArr = [eq(meetings.userId, ctx.auth.user.id)];
+      const whereConditionsArr = [eq(meetings.userId, ctx.auth!.user.id)];
       if (search) {
         whereConditionsArr.push(ilike(meetings.name, `%${search}%`));
       }
@@ -121,7 +142,7 @@ export const meetingsRouter = createTRPCRouter({
         .innerJoin(agents, eq(meetings.agentId, agents.id))
         .where(
           and(
-            eq(meetings.userId, ctx.auth.user.id),
+            eq(meetings.userId, ctx.auth!.user.id),
             search ? ilike(meetings.name, `%${search}%`) : undefined,
             status ? eq(meetings.status, status) : undefined,
             agentId ? eq(meetings.agentId, agentId) : undefined,
@@ -137,7 +158,7 @@ export const meetingsRouter = createTRPCRouter({
         .innerJoin(agents, eq(meetings.agentId, agents.id))
         .where(
           and(
-            eq(meetings.userId, ctx.auth.user.id),
+            eq(meetings.userId, ctx.auth!.user.id),
             search ? ilike(meetings.name, `%${search}%`) : undefined,
             status ? eq(meetings.status, status) : undefined,
             agentId ? eq(meetings.agentId, agentId) : undefined,
