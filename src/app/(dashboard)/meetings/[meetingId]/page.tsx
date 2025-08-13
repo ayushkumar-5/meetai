@@ -1,34 +1,34 @@
-import { caller } from '@/trpc/server';
-import GeneratedAvatar from '@/components/generated-avatar';
-import { Badge } from '@/components/ui/badge';
-import { Clock } from 'lucide-react';
+import { getQueryClient, trpc } from '@/trpc/server';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Suspense } from 'react';
+import { MeetingIdView } from '@/modules/meetings/ui/views/meeting-id-view';
 
-type PageProps = {
-  params: { meetingId: string };
-};
+interface Props {
+  params: {
+    meetingId: string;
+  };
+}
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: Props) {
   const { meetingId } = params;
-  const meeting = await caller.meetings.getOne({ id: meetingId });
-
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(
+    trpc.meetings.getOne.queryOptions({ id: meetingId })
+  );
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session) {
+    redirect("/sign-in");
+  }
   return (
-    <div className="py-4 px-4 md:px-8">
-      <div className="bg-white rounded-lg border px-4 py-5 flex items-start justify-between">
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-semibold">{meeting.name}</h1>
-          <div className="flex items-center gap-x-2 text-sm text-gray-600">
-            <span>↳</span>
-            <GeneratedAvatar
-              seed={meeting.agentName ?? meeting.agentId}
-              variant="bottts"
-              size={20}
-              className="rounded-sm border overflow-hidden"
-            />
-            <span>{meeting.agentName ?? 'Unknown Agent'}</span>
-          </div>
-        </div>
-        
-      </div>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense fallback={<div />}> 
+        <MeetingIdView meetingId={meetingId} />
+      </Suspense>
+    </HydrationBoundary>
   );
 }
