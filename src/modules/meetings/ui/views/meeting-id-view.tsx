@@ -8,6 +8,10 @@ import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
 import { UpdateMeetingDialog } from "../components/update-meeting-dialog";
 import { useState } from "react";
+import { MeetingActiveView } from "./states/meeting-active-view";
+import { MeetingUpcomingView } from "./states/meeting-upcoming-view";
+import { MeetingCompletedView } from "./states/meeting-completed-view";
+import { MeetingCancelledView } from "./states/meeting-cancelled-view";
 interface Props {
   meetingId: string;
 }
@@ -40,6 +44,12 @@ export const MeetingIdView = ({ meetingId }: Props) => {
       if (!ok) return;
       await removeMeeting.mutateAsync({ id: meetingId });
       };
+
+      const isActive = data.status === "active";
+const isUpcoming = data.status === "upcoming";
+const isCancelled = data.status === "cancelled";
+const isCompleted = data.status === "completed";
+const isProcessing = data.status === "processing";
   return (
     <>
     <RemoveConfirmation/>
@@ -55,7 +65,25 @@ export const MeetingIdView = ({ meetingId }: Props) => {
         onEdit={() => setUpdateMeetingDialogOpen(true)}
         onRemove={handleRemoveMeeting}
       />
-      {JSON.stringify(data, null, 2)}
+      {isCancelled && <MeetingCancelledView meeting={data} onReopen={() => { /* TODO */ }} />}
+      {isProcessing && (
+        <div className="bg-white rounded-lg border p-6 flex flex-col items-center justify-center py-10 gap-3">
+          <div className="h-4 w-40 bg-gray-200 rounded" />
+          <div className="text-base font-medium">Processing</div>
+          <div className="text-sm text-gray-600">We are finalizing your meeting details...</div>
+        </div>
+      )}
+      {isCompleted && <MeetingCompletedView meeting={data} />}
+      {isActive && (
+        <MeetingActiveView meeting={data} onJoin={() => { /* TODO: open meeting room */ }} />
+      )}
+      {isUpcoming && (
+        <MeetingUpcomingView
+          meeting={data}
+          onCancel={handleRemoveMeeting}
+          onStart={() => { /* TODO: implement start meeting */ }}
+        />
+      )}
     </div>
     </>
   );
