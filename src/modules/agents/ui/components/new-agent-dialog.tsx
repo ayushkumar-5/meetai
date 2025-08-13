@@ -1,6 +1,5 @@
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { AgentForm } from "./agents-form";
-
 interface NewAgentDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
