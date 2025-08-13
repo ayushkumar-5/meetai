@@ -1,5 +1,5 @@
 import { ResponsiveDialog } from "@/components/responsive-dialog";
-import { AgentForm } from "./agents-form";
+import { AgentForm } from "../../../meetings/ui/components/meeting-form";
 import { AgentGetOne } from "../../types";
 import GeneratedAvatar from "@/components/generated-avatar";
 
