@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { VideoIcon, CircleXIcon } from 'lucide-react';
+import { VideoIcon, CircleXIcon, Link } from 'lucide-react';
 import type { MeetingGetOne } from '../../../types';
 
 interface Props {
@@ -33,9 +33,11 @@ export const MeetingUpcomingView = ({ meeting, onCancel, onStart }: Props) => {
             <CircleXIcon className="h-4 w-4 mr-2" />
             Cancel meeting
           </Button>
-          <Button onClick={onStart}>
-            <VideoIcon className="h-4 w-4 mr-2" />
-            Start meeting
+          <Button asChild className="w-full lg:w-auto">
+            <Link href={`/call/${meeting.id}`}>
+              <VideoIcon className="h-4 w-4 mr-2" />
+              Start meeting
+            </Link>
           </Button>
         </div>
       </div>
