@@ -75,13 +75,20 @@ const isProcessing = data.status === "processing";
       )}
       {isCompleted && <MeetingCompletedView meeting={data} />}
       {isActive && (
-        <MeetingActiveView meeting={data} onJoin={() => { /* TODO: open meeting room */ }} />
+        <MeetingActiveView
+          meeting={data}
+          onJoin={() => {
+            router.push(`/call/${meetingId}`);
+          }}
+        />
       )}
       {isUpcoming && (
         <MeetingUpcomingView
           meeting={data}
           onCancel={handleRemoveMeeting}
-          onStart={() => { /* TODO: implement start meeting */ }}
+          onStart={() => {
+            router.push(`/call/${meetingId}`);
+          }}
         />
       )}
     </div>
