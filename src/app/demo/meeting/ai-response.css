@@ -1,0 +1,82 @@
+/* AI Response Formatting Styles */
+.ai-response {
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .ai-response p {
+    margin: 0.75rem 0;
+  }
+  
+  .ai-response .step,
+  .ai-response .numbered-step {
+    background-color: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .ai-response .question {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+  }
+  
+  .ai-response .header-section {
+    margin: 1rem 0;
+  }
+  
+  .ai-response .header-section h4 {
+    color: #1976d2;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  
+  .ai-response .section {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ai-response strong {
+    color: #1565c0;
+    font-weight: 600;
+  }
+  
+  .ai-response sup {
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+  
+  .ai-response .error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef5350;
+    border-radius: 4px;
+    padding: 0.75rem;
+  }
+  
+  /* Math and formula styling */
+  .ai-response .formula {
+    background-color: #f5f5f5;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin: 0 2px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .ai-response .step,
+    .ai-response .numbered-step,
+    .ai-response .question {
+      padding: 0.5rem 0.75rem;
+      margin: 0.25rem 0;
+    }
+  }

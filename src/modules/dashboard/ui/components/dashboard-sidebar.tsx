@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import Link from "next/link";
-import { BotIcon, VideoIcon, StarIcon } from "lucide-react";
+import { BotIcon, VideoIcon, StarIcon , UserRound} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -30,6 +30,11 @@ const firstSection = [
         icon: BotIcon,
         label: "Agents",
         href: "/agents",
+    },
+    {
+        icon: UserRound,
+        label: "Demo",
+        href: "/demo",
     },
 ];
 

@@ -9,17 +9,17 @@ import { columns } from '../components/columns';
 import { EmptyState } from '@/components/empty-state';
 import { useAgentsFilters } from '../../hooks/use-agents-filters';
 import { DataPagination } from '../components/data-pagination';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
+
 export const AgentsView = () => {
-  const router= useRouter();
+  const router = useRouter();
   const trpc = useTRPC();
-  const [filters, setFilters]=useAgentsFilters();
+  const [filters, setFilters] = useAgentsFilters();
   const { data } = useSuspenseQuery(
     trpc.agents.getMany.queryOptions({
       ...filters,
     })
   );
-
 
   return (
     <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
@@ -29,9 +29,10 @@ export const AgentsView = () => {
         onRowClick={(row) => router.push(`/agents/${row.id}`)}
       />
       <DataPagination
-      page={filters.page}
-      totalPages={data.totalPages}
-      onPageChange={(page)=>setFilters({page})}/>
+        page={filters.page}
+        totalPages={data.totalPages}
+        onPageChange={(page) => setFilters({ page })}
+      />
       {data.items.length === 0 && (
         <EmptyState
           title="Create your first agent"
@@ -42,24 +43,6 @@ export const AgentsView = () => {
   );
 };
 
-export const AgentsViewLoading = () => {
-  return (
-    <div className="flex items-center justify-center h-64">
-      <LoadingState
-        title="Loading Agents"
-        description="This may take a few seconds"
-      />
-    </div>
-  );
-};
+export const AgentsViewLoading = () => <p>Loading agents...</p>;
 
-export const AgentsViewError = () => {
-  return (
-    <div className="flex items-center justify-center h-64">
-      <ErrorState
-        title="Error Loading Agents"
-        description="Something went wrong"
-      />
-    </div>
-  );
-};
+export const AgentsViewError = () => <p>Failed to load agents.</p>;
