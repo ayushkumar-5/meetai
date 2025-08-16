@@ -20,8 +20,7 @@ export const DashboardUserButton = () => {
   }
 
   const handleBilling = () => {
-    // Add billing navigation logic here
-    console.log('Navigate to billing');
+    router.push("/upgrade");
   };
 
   const onLogout = () => {

@@ -69,24 +69,7 @@ export const MeetingsView = () => {
   );
 };
 
-export const MeetingsViewLoading = () => {
-  return (
-    <div className="flex items-center justify-center h-64">
-      <LoadingState
-        title="Loading Agents"
-        description="This may take a few seconds"
-      />
-    </div>
-  );
-};
+export const MeetingsViewLoading = () => <p>Loading meetings...</p>;
 
-export const MeetingsViewError = () => {
-  return (
-    <div className="flex items-center justify-center h-64">
-      <ErrorState
-        title="Error Loading Agents"
-        description="Something went wrong"
-      />
-    </div>
-  );
-};
+export const MeetingsViewError = () => <p>Failed to load meetings.</p>;
+
