@@ -1,6 +1,6 @@
 # MeetAI - AI-Powered Video Meeting Platform
 
-MeetAI is a **SaaS web application** that enables users to create **custom AI agents** (for education, business coaching, language tutoring, interview prep, sales assistance, etc.) and conduct **real-time video meetings** with them.
+MeetAI is a **meet web application** that enables users to create **custom AI agents** (for education, business coaching, language tutoring, interview prep, sales assistance, etc.) and conduct **real-time video meetings** with them.
 It includes **transcription, summarization, video recording, and post-meeting AI chat** for querying meeting insights.
 
 <img width="1360" height="731" alt="MeetAI screenshot" src="https://github.com/user-attachments/assets/fb2997b4-73b3-4627-bba2-3ba9b737176a" />
@@ -42,7 +42,7 @@ It includes **transcription, summarization, video recording, and post-meeting AI
 
 ## Project Overview
 
-MeetAI is a full-featured SaaS platform for building and interacting with AI agents inside realtime video meetings. Features include agent creation, meeting scheduling, live video + transcription, recordings, AI summaries, and contextual AI chat.
+MeetAI is a full-featured meet platform for building and interacting with AI agents inside realtime video meetings. Features include agent creation, meeting scheduling, live video + transcription, recordings, AI summaries, and contextual AI chat.
 
 ---
 
@@ -70,8 +70,8 @@ Here’s a quick walkthrough of how MeetAI works:
 ## Clone the repository
 
 ```bash
-git clone https://github.com/ayushkumar-5/saasai.git
-cd saasai
+git clone https://github.com/ayushkumar-5/meetai.git
+cd meetai
 ```
 
 ---
@@ -131,7 +131,7 @@ git init
 git add .
 git commit -m "chore: initial commit"
 git branch -M main
-git remote add origin https://github.com/ayushkumar-5/saasai.git
+git remote add origin https://github.com/ayushkumar-5/meetai.git
 git push -u origin main
 ```
 
