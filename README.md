@@ -372,7 +372,6 @@ DATABASE_URL=postgres://user:pass@host:port/db
 2. Create a feature branch: `git checkout -b feat/your-feature`
 3. Commit: `git commit -m "feat: ..."`
 4. Push & open a pull request
-5. Use automated code review (Code Rabbit or CI) and add tests
 
 ---
 
