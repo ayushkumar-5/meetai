@@ -15,7 +15,7 @@ It includes **transcription, summarization, video recording, and post-meeting AI
 * **Meeting Scheduling** — Schedule and manage meetings with agents.
 * **Real-Time Video Calls** — Powered by **Stream Video SDK** with transcription & recording.
 * **Post-Meeting Insights** — Transcripts (speaker-identified), AI summaries, recordings, and an AI chat to ask questions about the meeting.
-* **Demo Mode** — Full UI/workflow simulation without OpenAI billing (Gemini-powered chatbot).
+* **Demo Mode** — Full UI/workflow simulation without OpenAI billing (Gemini-powered chatbot,N8N).
 * **Authentication** — Better Auth with GitHub/Google OAuth support.
 * **Responsive UI** — Tailwind + Shadcn/UI, dark/light themes.
 * **Developer Friendly** — tRPC, Drizzle, Inngest hooks, modular components.
@@ -308,11 +308,11 @@ module.exports = {
 * **Auth:** Better Auth (email + GitHub/Google OAuth)
 * **APIs:** tRPC + TanStack Query
 * **Realtime Video & Chat:** Stream Video SDK + Stream Chat SDK
-* **AI:** OpenAI, Groq, Gemini (demo)
+* **AI:** OpenAI, Groq, Gemini, N8N (demo)
 * **Background Jobs:** Inngest
 * **Payments:** Polar
-* **Dev Tools:** ngrok / Hookdeck, Vercel, Drizzle Studio, Code Rabbit
-
+* **Dev Tools:** ngrok / Hookdeck, Vercel, Drizzle Studio
+  
 ---
 
 ## Environment Variables Example
